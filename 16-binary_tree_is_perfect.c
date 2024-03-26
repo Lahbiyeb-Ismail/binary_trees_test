@@ -1,10 +1,11 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_height - function that measures the height of a binary tree
- * @tree: tree
+ * binary_tree_height - Measures the height of a binary tree
  *
- * Return: size_t
+ * @tree: Pointer to the root node of the binary tree
+ *
+ * Return: Height of the binary tree, or 0 if tree is NULL
  */
 
 size_t binary_tree_height(const binary_tree_t *tree)
@@ -21,11 +22,11 @@ size_t binary_tree_height(const binary_tree_t *tree)
 	if (tree->right)
 		count_right = 1 + binary_tree_height(tree->right);
 
+
 	if (count_left > count_right)
 		return (count_left);
-	return (count_right);
-
-	return (0);
+	else
+		return (count_right);
 }
 
 /**
@@ -47,16 +48,16 @@ int _pow(int h)
 }
 
 /**
- * binary_tree_leaves - function that counts the leaves in a binary tree
+ * binary_tree_leaves - Counts the number of leaves in a binary tree
  *
- * @tree: tree
+ * @tree: Pointer to the root node of the binary tree
  *
- * Return: Always 0(Success)
- **/
+ * Return: Number of leaves in the binary tree, or 0 if tree is NULL
+ */
 
 size_t binary_tree_leaves(const binary_tree_t *tree)
 {
-	size_t leavesT = NULL;
+	size_t tree_leaves = 0;
 
 	if (tree == NULL)
 		return (0);
@@ -64,31 +65,30 @@ size_t binary_tree_leaves(const binary_tree_t *tree)
 	if (tree->left == NULL && tree->right == NULL)
 		return (1);
 
-	leavesT = binary_tree_leaves(tree->left) +
+	tree_leaves = binary_tree_leaves(tree->left) +
 		binary_tree_leaves(tree->right);
 
-	return (leavesT);
+	return (tree_leaves);
 }
 
 /**
- * binary_tree_is_perfect -  function that checks if a binary tree is perfect
- * binary tree
+ * binary_tree_is_perfect - Checks if a binary tree is perfect
  *
- * @tree: tree
+ * @tree: Pointer to the root node of the binary tree
  *
- * Return: Always 0(Success)
- **/
+ * Return: 1 if the binary tree is perfect, 0 otherwise or if tree is NULL
+ */
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int leavesT = binary_tree_leaves(tree);
-	int heightT = binary_tree_height(tree);
-	int perfectT = _pow(heightT);
+	int tree_leaves = binary_tree_leaves(tree);
+	int tree_height = binary_tree_height(tree);
+	int perfect_tree = _pow(tree_height);
 
 	if (tree == NULL)
 		return (0);
 
-	if (leavesT == perfectT)
+	if (tree_leaves == perfect_tree)
 		return (1);
 	return (0);
 }
